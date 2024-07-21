@@ -92,8 +92,8 @@
 			cursor: pointer;
 			font-family: "JetBrains Mono";
 			display: flex;
-			flex-direction: column; /* Change to column to stack items vertically */
-			align-items: flex-start; /* Align items to the start */
+			flex-direction: column;
+			align-items: flex-start;
         }
 
         .card:hover {
@@ -147,31 +147,10 @@
             background-color: #777777;
         }
 
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loader {
-            margin: 26px 0;
-            width: 46.8px;
-            height: 46.8px;
-            border: solid transparent 5.2px;
-            border-top-color: #0000ff;
-            border-bottom-color: #0000ff;
-            border-radius: 50%;
-            animation: spin 1s infinite;
-            margin-left: calc(50% - 23.4px);
-        }
-
         .label {
             display: inline-block;
 			padding: 2px 6px;
-			margin-bottom: 10px; /* Add margin to create space below the label */
+			margin-bottom: 10px;
 			border-radius: 4px;
 			font-size: 0.8em;
 			font-weight: bold;
@@ -192,7 +171,7 @@
     <span id='header-wrapper'>
         <header>
             <span id='logo'>
-                <img id='logo-img' draggable="false" ondragstart="return false;" src='https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/R8LQfDnS.jpg'>
+                <img id='logo-img' draggable="true" ondragstart="return false;" src='https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/R8LQfDnS.jpg'>
             </span>
             <span id='links'>
                 <a href='#' onclick="showPage('home')">Home</a>
@@ -205,7 +184,7 @@
             <div class="info-card">
                 <div class="social-buttons">
                     <a href="https://discord.gg/43ChvVf" target="_blank">Discord</a>
-                    <a href="https://x.com/" target="_blank">Twitter</a>
+                    <a href="https://x.com/n0stal6ic" target="_blank">Twitter</a>
                     <a href="https://www.tiktok.com/@n0stal6ic" target="_blank">TikTok</a>
                     <a href="https://www.example.com" target="_blank">Instagram</a>
                     <a href="https://steamcommunity.com/id/n0stal6ic" target="_blank">Steam</a>
@@ -218,6 +197,7 @@
                     <a href="https://unsplash.com/@n0stal6ic" target="_blank">Unsplash</a>
                     <a href="https://cash.app/$n0stal6ic" target="_blank">Cashapp</a>
                     <a href="https://example.com" target="_blank">Mastodon</a>
+					<a href="https://example.com" target="_blank">BlueSky</a>
                     <a href="https://vrchat.com/home/user/usr_4f90b718-839a-4eae-9a9d-8ea1fcde02c2" target="_blank">VRChat</a>
                     <a href="https://hub.abinteractive.net/social/profile?guid=7bbdcea7-a7f8-a35c-9ba6-fe2fef31433c" target="_blank">ChilloutVR</a>
                 </div>
@@ -228,32 +208,32 @@
             </div>
         </div>
         <div id="software" class="page" style="display: none;">
-	    <a href="https://github.com/yt-dlp/yt-dlp" target="_blank">
+	    <a href="https://example.com" target="_blank">
                 <div class="card">
                     <span class="label webapp">Web-App</span>
-                    <h2>YouTube Video Downloader</h2>
-                    <p>YouTube video downloader that saves the best quality streams.</p>
+                    <h2>Button 1</h2>
+                    <p>Button 1 Text</p>
+                </div>
+            </a>
+	    <a href="https://example.com" target="_blank">
+                <div class="card">
+                    <span class="label webapp">Web-App</span>
+                    <h2>Button 2</h2>
+                    <p>Button 2 Text</p>
                 </div>
             </a>
             <a href="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/apps/MediaDL.bat" target="_blank">
                 <div class="card">
                     <span class="label software">Software</span>
                     <h2>MediaDL</h2>
-                    <p>YouTube downloader GUI in batch for windows.</p>
+                    <p>Simple YouTube downloader wrapper in batch for windows.</p>
                 </div>
             </a>
-            <a href="https://github.com/n0stal6ic/n0stal6ic.github.io/raw/main/apps/Eclipse.exe" target="_blank">
+            <a href="https://example.com" target="_blank">
                 <div class="card">
                     <span class="label software">Software</span>
-                    <h2>Eclipse-Mod</h2>
-                    <p>Jailbreaking tool for windows based school laptops.</p>
-                </div>
-            </a>
-	    <a href="https://example.com" target="_blank">
-                <div class="card">
-                    <span class="label webapp">Web-App</span>
-                    <h2>Kahoot Botter</h2>
-                    <p>Bots kahoot games with random players.</p>
+                    <h2>Eclipse Mod</h2>
+                    <p>Jailbreaking tool for windows based laptops.</p>
                 </div>
             </a>
         </div>

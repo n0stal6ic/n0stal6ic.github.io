@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Site</title>
+    <style>
+        @font-face {
+            font-family: "JetBrains Mono";
+            src: url("https://github.com/n0stal6ic/website/raw/main/jetbrains-mono.woff2") format("woff2");
+        }
+
+        * {
+            font-family: "JetBrains Mono";
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            color: white;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #1e1e1e;
+            font-size: 1.7em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        #content {
+            background-color: #272727;
+            display: flex;
+            border-radius: 15.6px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        #left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-right: 20px;
+        }
+
+        #profile-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #profile-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .button-group a {
+            background-color: #555555;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+
+        .button-group a:hover {
+            background-color: #777777;
+        }
+
+        #sticker-box {
+            background-color: #3a3a3a;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        #sticker-box img {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #main-content {
+            flex: 2;
+            background-color: #3a3a3a;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content-section {
+            display: none;
+        }
+
+        .main-content-section.active {
+            display: block;
+        }
+
+        .card {
+            background-color: #555555;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+
+        .card:hover {
+            background-color: #777777;
+        }
+
+        .social-buttons a {
+            background-color: #555555;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            display: block;
+            transition: background-color 0.2s;
+        }
+
+        .social-buttons a:hover {
+            background-color: #777777;
+        }
+
+        /* Mobile layout */
+        @media screen and (max-width: 768px) {
+            #content {
+                flex-direction: column;
+            }
+
+            #left-panel {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+
+            .button-group a {
+                font-size: 1.5em;
+                padding: 20px;
+            }
+
+            .card h2 {
+                font-size: 1.5em;
+            }
+
+            .card p {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id='container'>
+        <div id='content'>
+            <div id='left-panel'>
+                <div id='profile-box'>
+                    <img src='https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/IMG.jpg' alt='Picture'>
+                </div>
+                <div class='button-group'>
+                    <a href='#' onclick="showMainContent('content1')">Home</a>
+                    <a href='#' onclick="showMainContent('content2')">Socials</a>
+                    <a href='#' onclick="showMainContent('content3')">Software</a>
+                </div>
+                <div id='sticker-box'>
+                    <a href="https://lucida.to/">
+                        <img src="https://lucida.to/buttons/88x31.gif" alt="Lucida" style="width: 88px; height: 31px;">
+                    </a>
+                </div>
+            </div>
+            <div id='main-content'>
+                <div id='content1' class='main-content-section active'>
+                    <p>hello oomf, welcome to my website</p>
+                </div>
+                <div id='content2' class='main-content-section'>
+                    <div class="social-buttons">
+                        <a href="https://discord.gg/43ChvVf" target="_blank">Discord</a>
+                        <a href="https://x.com/n0stal6ic" target="_blank">Twitter</a>
+                        <a href="https://www.tiktok.com/@n0stal6ic" target="_blank">TikTok</a>
+                        <a href="https://www.example.com" target="_blank">Instagram</a>
+                        <a href="https://steamcommunity.com/id/n0stal6ic" target="_blank">Steam</a>
+                        <a href="https://github.com/n0stal6ic" target="_blank">GitHub</a>
+                        <a href="https://soundcloud.com/n0stal6ic" target="_blank">Soundcloud</a>
+                        <a href="https://www.last.fm/user/n0stal6ic" target="_blank">Last.FM</a>
+                        <a href="https://bandcamp.com/n0stal6ic" target="_blank">Bandcamp</a>
+                        <a href="https://audius.co/n0stal6ic" target="_blank">Audius</a>
+                        <a href="https://www.roblox.com/users/129784917/profile" target="_blank">Roblox</a>
+                        <a href="https://unsplash.com/@n0stal6ic" target="_blank">Unsplash</a>
+                        <a href="https://cash.app/$n0stal6ic" target="_blank">Cashapp</a>
+                        <a href="https://example.com" target="_blank">Mastodon</a>
+                        <a href="https://example.com" target="_blank">BlueSky</a>
+                        <a href="https://vrchat.com/home/user/usr_4f90b718-839a-4eae-9a9d-8ea1fcde02c2" target="_blank">VRChat</a>
+                        <a href="https://hub.abinteractive.net/social/profile?guid=7bbdcea7-a7f8-a35c-9ba6-fe2fef31433c" target="_blank">ChilloutVR</a>
+                    </div>
+                </div>
+                <div id='content3' class='main-content-section'>
+                    <a href="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/apps/MediaDL.bat" target="_blank">
+                        <div class="card">
+                            <h2>MediaDL</h2>
+                            <p>Simple YouTube downloader wrapper in batch for windows.</p>
+                        </div>
+                    </a>
+                    <a href="https://example.com" target="_blank">
+                        <div class="card">
+                            <h2>Eclipse Mod</h2>
+                            <p>Jailbreaking tool for windows-based laptops.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showMainContent(contentId) {
+            document.querySelectorAll('.main-content-section').forEach(function(element) {
+                element.classList.remove('active');
+            });
+            document.getElementById(contentId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

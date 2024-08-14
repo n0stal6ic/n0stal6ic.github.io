@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Site</title>
+    <title>n0stal6ic</title>
     <style>
         @font-face {
             font-family: "JetBrains Mono";
@@ -44,6 +44,7 @@
             border-radius: 15.6px;
             width: 100%;
             padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 255, 0.3); /* Light blue outer glow */
         }
 
         #left-panel {
@@ -151,6 +152,20 @@
             #left-panel {
                 margin-right: 0;
                 margin-bottom: 20px;
+                width: 100%;
+                align-items: center; /* Center the panel content */
+            }
+
+            #main-content {
+                width: 100%;
+                margin-bottom: 20px; /* Ensure space for stickers */
+            }
+
+            #sticker-box {
+                position: relative;
+                bottom: 0;
+                width: 100%;
+                box-shadow: none; /* Remove glow effect on mobile */
             }
 
             .button-group a {
@@ -176,7 +191,7 @@
                     <img src='https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/IMG.jpg' alt='Picture'>
                 </div>
                 <div class='button-group'>
-                    <a href='#' onclick="showMainContent('content1')">Home</a>
+                    <a href='#' onclick="showMainContent('content1')">About</a>
                     <a href='#' onclick="showMainContent('content2')">Socials</a>
                     <a href='#' onclick="showMainContent('content3')">Software</a>
                 </div>

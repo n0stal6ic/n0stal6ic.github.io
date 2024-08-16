@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>n0stal6ic</title>
     <style>
-        @font-face {
-            font-family: "JetBrains Mono";
-            src: url("https://github.com/n0stal6ic/website/raw/main/jetbrains-mono.woff2") format("woff2");
-        }
-
         * {
             font-family: "JetBrains Mono";
             padding: 0;
@@ -44,7 +39,7 @@
             border-radius: 15.6px;
             width: 100%;
             padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 255, 0.3); /* Light blue outer glow */
+			box-shadow: 0 0 20px rgba(0, 0, 255, 0.3);
         }
 
         #left-panel {
@@ -54,6 +49,7 @@
             align-items: center;
             padding-right: 20px;
         }
+
 
         #profile-box {
             text-align: center;
@@ -143,7 +139,6 @@
             background-color: #777777;
         }
 
-        /* Mobile layout */
         @media screen and (max-width: 768px) {
             #content {
                 flex-direction: column;
@@ -153,32 +148,7 @@
                 margin-right: 0;
                 margin-bottom: 20px;
                 width: 100%;
-                align-items: center; /* Center the panel content */
-            }
-
-            #main-content {
-                width: 100%;
-                margin-bottom: 20px; /* Ensure space for stickers */
-            }
-
-            #sticker-box {
-                position: relative;
-                bottom: 0;
-                width: 100%;
-                box-shadow: none; /* Remove glow effect on mobile */
-            }
-
-            .button-group a {
-                font-size: 1.5em;
-                padding: 20px;
-            }
-
-            .card h2 {
-                font-size: 1.5em;
-            }
-
-            .card p {
-                font-size: 1.2em;
+                align-items: center;
             }
         }
     </style>
@@ -197,13 +167,19 @@
                 </div>
                 <div id='sticker-box'>
                     <a href="https://lucida.to/">
-                        <img src="https://lucida.to/buttons/88x31.gif" alt="Lucida" style="width: 88px; height: 31px;">
+                        <img src="https://lucida.to/buttons/88x31.gif" alt="Lucida" style="width: 80px; height: 16px;">
+                    </a>
+					<a href="https://lain.wiki/">
+                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/lain_button.png" alt="Lain" style="width: 80px; height: 15px;">
+                    </a>
+					<a href="https://www.mozilla.org/firefox/new/">
+                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/blue_1.gif" alt="Lain" style="width: 80px; height: 15px;">
                     </a>
                 </div>
             </div>
             <div id='main-content'>
                 <div id='content1' class='main-content-section active'>
-                    <p>hello oomf, welcome to my website</p>
+                    <p>hi</p>
                 </div>
                 <div id='content2' class='main-content-section'>
                     <div class="social-buttons">
@@ -250,6 +226,29 @@
             });
             document.getElementById(contentId).classList.add('active');
         }
+		
+		function showMainContent(contentId) {
+        document.querySelectorAll('.main-content-section').forEach(function(element) {
+            element.classList.remove('active');
+        });
+        document.getElementById(contentId).classList.add('active');
+		}
+
+		function adjustPadding() {
+        const leftPanel = document.getElementById('left-panel');
+        if (window.innerWidth <= 768) {
+            leftPanel.style.paddingRight = '0';
+        } else {
+            leftPanel.style.paddingRight = '20px';
+        }
+		}
+
+		window.onload = function() {
+			showMainContent('content1');
+			adjustPadding();
+		};
+
+		window.onresize = adjustPadding;
     </script>
 </body>
 </html>

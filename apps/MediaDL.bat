@@ -11,7 +11,7 @@
 :: ffmpeg         -   https://www.ffmpeg.org/
 :: yt-dlp         -   https://github.com/yt-dlp/yt-dlp
 :: ===============================================================================
-:: ================ If you are reading this get out of my code lol ===============
+:: ================ If you are reading this, hellooooo hiiiiiiiiii ===============
 :: ===============================================================================
 ::
 :: -------------------------------------------------- Setting up the window

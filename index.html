@@ -264,7 +264,7 @@
 						<a href="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/apps/MediaDL.bat" target="_blank">
 							<div class="card">
 								<h2>MediaDL</h2>
-								<p>Simple YouTube downloader wrapper in batch for windows.</p>
+								<p>Simple YouTube downloader wrapper in batch.</p>
 							</div>
 						</a>
 						<a href="https://example.com" target="_blank">
@@ -279,12 +279,18 @@
         </div>
     </div>
     <script>
+/* START PAGE SWITCH */
+
         function showMainContent(contentId) {
             document.querySelectorAll('.main-content-section').forEach(function(element) {
                 element.classList.remove('active');
             });
             document.getElementById(contentId).classList.add('active');
         }
+
+/* END PAGE SWITCH */
+
+/* START RESIZE */
 
         function adjustPadding() {
             const leftPanel = document.getElementById('left-panel');
@@ -301,6 +307,10 @@
         };
 
         window.onresize = adjustPadding;
+
+/* END RESIZE */
+
+/* START ONEKO */
 
 (function oneko() {
   const isReducedMotion =
@@ -444,7 +454,6 @@
   function idle() {
     idleTime += 1;
 
-    // every ~ 20 seconds
     if (
       idleTime > 10 &&
       Math.floor(Math.random() * 200) == 0 &&
@@ -538,6 +547,10 @@
   init();
 })();
 
+/* END ONEKO */
+
+/* START HOVER CARD */
+
 document.getElementById('content').addEventListener('mousemove', function (event) {
     const rect = this.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -554,6 +567,9 @@ document.getElementById('content').addEventListener('mousemove', function (event
 document.getElementById('content').addEventListener('mouseleave', function () {
     this.style.transform = 'scale(1) perspective(500px) rotateX(0deg) rotateY(0deg)';
 });
+
+/* END HOVER CARD */
+
     </script>
 </body>
 </html>

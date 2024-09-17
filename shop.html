@@ -23,10 +23,13 @@
             background-color: #222;
             border: 2px solid #444;
             padding: 20px;
-            width: 80%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 700px;
             text-align: center;
+			box-sizing: border-box;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+			transform-origin: center center;
+			transform: scale(1.1);
         }
 
         .category {
@@ -43,6 +46,29 @@
             justify-content: center;
             align-items: center;
         }
+
+		.product-item {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			width: 100%;
+		}
+
+		product-item img {
+			width: 50px;
+			height: 50px;
+			margin-right: 10px;
+		}
+
+		.product-item .details {
+			flex-grow: 1;
+			width: calc(100% - 60px);  /* Ensures text fits beside the image */
+		}
+
+		.product-item .details p {
+			margin: 0;
+			word-wrap: break-word;  /* Prevents text from overflowing */
+		}
 
         .category .dropdown-icon {
             position: absolute;
@@ -77,6 +103,22 @@
             height: auto;
             margin-bottom: 20px;
         }
+		
+		@media (max-width: 768px) {
+    .product-item {
+        flex-direction: column;  /* Stack items vertically on smaller screens */
+        align-items: flex-start;
+    }
+
+    .product-item img {
+        margin-right: 0;
+        margin-bottom: 10px;  /* Adds space between image and text */
+    }
+
+    .product-item .details {
+        width: 100%;
+    }
+}
     </style>
 </head>
 <body>
@@ -226,17 +268,6 @@
                 <span class="divider">|</span>
                 <span>Psilocybin</span>
             </div>
-			<div class="product">
-                <img src="https://via.placeholder.com/50" alt="Product 6">
-                <span class="divider">|</span>
-                <span>N,N-DMT</span>
-                <span class="divider">|</span>
-                <span>Qty: 0</span>
-                <span class="divider">|</span>
-                <span>Price: $15/pc</span>
-                <span class="divider">|</span>
-                <span>Powder</span>
-            </div>
             <div class="product">
                 <img src="https://i.ibb.co/Lvg0WwB/13rte.jpg" alt="Product 5">
                 <span class="divider">|</span>
@@ -247,6 +278,17 @@
                 <span>Price: $10/gram</span>
                 <span class="divider">|</span>
                 <span>Leaves</span>
+            </div>
+			<div class="product">
+                <img src="https://via.placeholder.com/50" alt="Product 6">
+                <span class="divider">|</span>
+                <span>N,N-DMT</span>
+                <span class="divider">|</span>
+                <span>Qty: 0</span>
+                <span class="divider">|</span>
+                <span>Price: $15/pc</span>
+                <span class="divider">|</span>
+                <span>Powder</span>
             </div>
             <div class="product">
                 <img src="https://via.placeholder.com/50" alt="Product 6">
@@ -268,7 +310,7 @@
             <div class="product">
                 <img src="https://i.ibb.co/TRbqgkP/d31w2.jpg" alt="Product 7">
                 <span class="divider">|</span>
-                <span>Dextroampamphet</span>
+                <span>Dextroamphetamine</span>
                 <span class="divider">|</span>
                 <span>Qty: 100</span>
                 <span class="divider">|</span>
@@ -306,6 +348,7 @@
 function playAudio() {
     const audio = document.getElementById('background-audio');
     if (audio && audio.paused) {
+		audio.loop = true;
         audio.play().catch(error => {
             console.log('Autoplay was prevented:', error);
         });

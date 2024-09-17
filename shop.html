@@ -62,12 +62,22 @@
 
 		.product-item .details {
 			flex-grow: 1;
-			width: calc(100% - 60px);  /* Ensures text fits beside the image */
+			width: calc(100% - 60px);
 		}
 
 		.product-item .details p {
 			margin: 0;
-			word-wrap: break-word;  /* Prevents text from overflowing */
+			word-wrap: break-word;
+		}
+
+		.product-text {
+			font-size: 16px;
+		}
+
+		@media only screen and (max-width: 768px) {
+			.product-text {
+				font-size: 12px;
+			}
 		}
 
         .category .dropdown-icon {
@@ -106,13 +116,13 @@
 		
 		@media (max-width: 768px) {
     .product-item {
-        flex-direction: column;  /* Stack items vertically on smaller screens */
+        flex-direction: column;
         align-items: flex-start;
     }
 
     .product-item img {
         margin-right: 0;
-        margin-bottom: 10px;  /* Adds space between image and text */
+        margin-bottom: 10px;
     }
 
     .product-item .details {

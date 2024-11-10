@@ -8,229 +8,226 @@
     <meta property="og:type" content="website"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>n0stal6ic</title>
-    <style>
-        * {
-            font-family: "JetBrains Mono";
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-            color: white;
-            text-decoration: none;
-        }
+<style>
+    * {
+        font-family: "JetBrains Mono";
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        color: white;
+        text-decoration: none;
+    }
 
-        body {
-            background-color: #000000;
-            font-size: 1.7em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+    body {
+        background-color: #000000;
+        font-size: 1.7em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
 
-        #container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 80%;
-            max-width: 1000px;
-        }
+    #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 80%;
+        max-width: 1000px;
+    }
 
-        @keyframes flicker {
-            0%, 100% {
-                box-shadow: 0 0 25px rgba(0, 0, 255, 0.8);
-            }
-            60% {
-                box-shadow: 0 0 25px rgba(0, 0, 255, 0.5)
-            }
+    @keyframes flicker {
+        0%, 100% {
+            box-shadow: 0 0 25px rgba(0, 0, 255, 0.8);
         }
+        60% {
+            box-shadow: 0 0 25px rgba(0, 0, 255, 0.5);
+        }
+    }
 
+    .scrollable-container {
+        max-height: 400px;
+        overflow-y: auto;
+        padding-right: 10px;
+        scrollbar-width: thin;
+        scrollbar-color: #777777 #555555;
+    }
+
+    .scrollable-container::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .scrollable-container::-webkit-scrollbar-track {
+        background: #555555;
+        border-radius: 5px;
+    }
+
+    .scrollable-container::-webkit-scrollbar-thumb {
+        background-color: #777777;
+        border-radius: 5px;
+        border: 2px solid #555555;
+    }
+
+    #content {
+        background-color: #272727;
+        display: flex;
+        border-radius: 15.6px;
+        width: 100%;
+        padding: 20px;
+        animation: flicker 3s infinite;
+        transition: transform 0.2s, box-shadow 0.1s;
+    }
+
+    #content:hover {
+        transform: scale(0.5);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    }
+
+    #left-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-right: 20px;
+    }
+
+    #profile-box {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #profile-box img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .button-group a {
+        background-color: #555555;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        text-align: center;
+        transition: background-color 0.4s;
+    }
+
+    .button-group a:hover {
+        background-color: #777777;
+    }
+
+    #sticker-box {
+        background-color: #3a3a3a;
+        padding: 10px;
+        border-radius: 10px;
+        width: 300px;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+
+    .sticker-container {
+        display: flex;
+        gap: 10px;
+        animation: scroll 10s linear infinite;
+        white-space: nowrap;
+    }
+
+    .sticker-container a img {
+        width: 88px;
+        height: 31px;
+        display: block;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    #main-content {
+        flex: 2;
+        background-color: #3a3a3a;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-content-section {
+        display: none;
+    }
+
+    .main-content-section.active {
+        display: block;
+    }
+
+    .card {
+        background-color: #555555;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        text-align: center;
+        transition: background-color 0.2s;
+    }
+
+    .card:hover {
+        background-color: #777777;
+    }
+
+    .social-buttons a {
+        background-color: #555555;
+        padding: 10px 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        text-align: center;
+        display: block;
+        transition: background-color 0.2s;
+    }
+
+    .social-buttons a:hover {
+        background-color: #777777;
+    }
+
+    @media screen and (max-width: 768px) {
         #content {
-            background-color: #272727;
-            display: flex;
-            border-radius: 15.6px;
-            width: 100%;
-            padding: 20px;
-            animation: flicker 3s infinite;
-			transition: transform 0.2s, box-shadow 0.1s;
-			/* box-shadow: 0 0 15px rgba(0, 0, 255, 0.3); */
+            flex-direction: column;
         }
-
-		#content:hover {
-			transform: scale(0.5);
-			box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
-		}
 
         #left-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            margin-right: 0;
+            margin-bottom: 20px;
+            width: 100%;
             align-items: center;
-            padding-right: 20px;
         }
-
-        #profile-box {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        #profile-box img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
-        .button-group a {
-            background-color: #555555;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            text-align: center;
-            transition: background-color 0.4s;
-        }
-
-        .button-group a:hover {
-            background-color: #777777;
-        }
-
-        #sticker-box {
-            background-color: #3a3a3a;
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            width: 100%;
-        }
-
-        #sticker-box a {
-            display: block;
-            display: inline-block;
-            flex-wrap: wrap;
-        }
-
-        #sticker-box img {
-            width: 15px;
-            height: 15px;
-        }
-
-        #main-content {
-            flex: 2;
-            background-color: #3a3a3a;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .main-content-section {
-            display: none;
-        }
-
-        .main-content-section.active {
-            display: block;
-        }
-
-        .card {
-            background-color: #555555;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            text-align: center;
-            transition: background-color 0.2s;
-        }
-
-        .card:hover {
-            background-color: #777777;
-        }
-
-        .social-buttons a {
-            background-color: #555555;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            text-align: center;
-            display: block;
-            transition: background-color 0.2s;
-        }
-
-        .social-buttons a:hover {
-            background-color: #777777;
-        }
-
-		.scrollable-container {
-			max-height: 400px; /* Adjust height as needed */
-			overflow-y: auto;
-			padding-right: 10px; /* To ensure scrollbar does not overlap content */
-		}
-
-		.social-buttons a, .software-buttons a {
-			display: block;
-			margin-bottom: 10px;
-		}
-
-        @media screen and (max-width: 768px) {
-            #content {
-                flex-direction: column;
-            }
-
-            #left-panel {
-                margin-right: 0;
-                margin-bottom: 20px;
-                width: 100%;
-                align-items: center;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
     <div id='container'>
         <div id='content'>
             <div id='left-panel'>
                 <div id='profile-box'>
-                    <img src='https://lastfm.freetls.fastly.net/i/u/c38d9799b34fadc8fdea44312ab0f911.png' alt='Picture'>
+                    <img src='https://nostalgic.cc/lain2.png' alt='Picture'>
                 </div>
                 <div class='button-group'>
                     <a href='#' onclick="showMainContent('content1')">Home</a>
                     <a href='#' onclick="showMainContent('content2')">Socials</a>
                     <a href='#' onclick="showMainContent('content3')">Software</a>
                 </div>
-                <div id='sticker-box'>
-                    <a href="https://lucida.to/">
-                        <img src="https://lucida.to/buttons/88x31.gif" alt="Lucida" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://lain.wiki/">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/lain_button.png" alt="Lain" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://www.mozilla.org/firefox/new/">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/blue_1.gif" alt="Firefox" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://pgptool.org/">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/usepgp.gif" alt="Use PGP" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://www.eff.org/">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/eff2.gif" alt="EFF" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://www.packers.com">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/packers2.gif" alt="Packers" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://www.foobar2000.org/">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/fb2k.png" alt="Foobar2000" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://www.noaa.gov/">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/noaa.gif" alt="NOAA" style="width: 80px; height: 15px;">
-                    </a>
-					<a href="https://www.7-zip.org/">
-                        <img src="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/webicons/7z_jt2.gif" alt="7Zip" style="width: 80px; height: 15px;">
-                    </a>
-                </div>
+				<div id="sticker-box"><div class="sticker-container"><a href="https://lucida.to/"><img src="https://lucida.to/buttons/88x31.gif" alt="Lucida"></a><a href="https://lain.wiki/"><img src="https://nostalgic.cc/webicons/lain_button.png" alt="Lain"></a><a href="https://www.mozilla.org/firefox/new/"><img src="https://nostalgic.cc/webicons/blue_1.gif" alt="Firefox"></a><a href="https://pgptool.org/"><img src="https://nostalgic.cc/webicons/usepgp.gif" alt="Use PGP"></a></div></div>
             </div>
             <div id='main-content'>
                 <div id='content1' class='main-content-section active'>
@@ -258,20 +255,20 @@
                 </div>
                 <div id='content3' class='main-content-section'>
 					<div class="scrollable-container">
-						<a href="https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/apps/MediaDL.bat" target="_blank">
+					<a href="https://nostalgic.cc/apps/MediaDL.bat" target="_blank">
 							<div class="card">
 								<h2>MediaDL</h2>
 								<p>Simple YouTube downloader wrapper in batch.</p>
 							</div>
 						</a>
-						<a href="https://example.com" target="_blank">
+						<a href="" target="_blank">
 							<div class="card">
 								<h2>Eclipse Mod</h2>
 								<p>Jailbreaking tool for windows-based laptops.</p>
 							</div>
-						</div>
-                    </a>
-                </div>
+						</a>
+					</div>
+				</div>
             </div>
         </div>
     </div>
@@ -405,7 +402,7 @@
     nekoEl.style.top = `${nekoPosY - 16}px`;
     nekoEl.style.zIndex = 2147483647;
 
-    let nekoFile = "https://raw.githubusercontent.com/n0stal6ic/n0stal6ic.github.io/main/oneko.gif"
+    let nekoFile = "https://nostalgic.cc/oneko.gif"
     const curScript = document.currentScript
     if (curScript && curScript.dataset.cat) {
       nekoFile = curScript.dataset.cat
@@ -566,7 +563,6 @@ document.getElementById('content').addEventListener('mouseleave', function () {
 });
 
 /* END HOVER CARD */
-
     </script>
 </body>
 </html>

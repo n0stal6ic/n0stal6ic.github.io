@@ -138,7 +138,7 @@
     .sticker-container {
         display: flex;
         gap: 10px;
-        animation: scroll linear infinite;
+        animation: scroll 120s linear infinite;
         white-space: nowrap;
     }
 
@@ -150,10 +150,10 @@
 
     @keyframes scroll {
         from {
-            transform: translateX(100%);
+            transform: translateX(5%);
         }
         to {
-            transform: translateX(-100%);
+            transform: translateX(-120%);
         }
     }
 

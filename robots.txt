@@ -1,1 +1,1 @@
-Disallow: NOTHING YAY!!! :) WOW
+Disallow: /

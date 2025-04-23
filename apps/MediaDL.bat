@@ -16,7 +16,7 @@
 ::
 :: -------------------------------------------------- Setting up the window
 @echo off
-title Media Downloader
+title MediaDL
 color B
 mode con cols=40 lines=3
 cls
@@ -34,21 +34,27 @@ if exist ytdir.yt (
 :direxists
 cd %ytdir%
 if not exist %ytdir% goto ytdlni
-if not exist %ytdir%\youtube-dl.exe goto ytdlni
 color 0a
 goto settingscheck
 :: -------------------------------------------------- Checks for user settings
 :settingscheck
-:: ADD SHIT HERE
 set downloader=yt-dlp.exe
 set downloaddir=%USERPROFILE%\Desktop
 set batfiledir=%cd%
+set "forceytdlp=0"
+set "forceytdl=0"
+set "embedthumb=0"
+set "downloadthumb=0"
+set "embedsubs=0"
+set "downloadsubs=0"
+set "addmeta=0"
+set "customsettings="
+:: fix below please
 ::set iosqualityspoof=--extractor-args "youtube:player_client=default,ios"
-:: Fix Below Please ----------------------- And Above lol
 ::set albumart=--embed-thumbnail
 ::set albumartwrite=--write-thumbnail
 ::set addmeta=--add-metadata
-set cookies=--cookies-from-browser chrome
+set cookies=--cookies-from-browser firefox
 goto start
 :: -------------------------------------------------- Starts the introduction
 :startcls
@@ -60,7 +66,7 @@ echo Paste URL:
 echo.
 set /p url="> "
 goto formatdownload
-:: -------------------------------------------------- Refresh after finishing a command
+:: -------------------------------------------------- Refresh after command
 :formatdownloadcls
 cls
 :: -------------------------------------------------- The second page
@@ -79,7 +85,6 @@ echo.
 echo [S] Settings
 echo [X] Clear Cache
 echo [D] Factory Reset
-echo [1] Credits
 echo.
 set /p input= "> " 
 if %input%==O goto downloadboth
@@ -112,112 +117,84 @@ exit
 :downloadoptions
 :settings
 cls
-mode con cols=40 lines=14
+mode con cols=40 lines=15
 color 0a
-cls
-echo Settings
+
+echo Settings (toggle to enable/disable):
+echo ------------------------------------
+echo [Y] Force YT-DLP         [%forceytdlp%]
+echo [2] Force YouTube-DL     [%forceytdl%]
+echo [A] Embed Album Art      [%embedthumb%]
+echo [R] Download Album Art   [%downloadthumb%]
+echo [S] Embed Subtitles      [%embedsubs%]
+echo [X] Download Subtitles   [%downloadsubs%]
+echo [M] Add Metadata         [%addmeta%]
 echo.
-echo [Y] Force YT-DLP
-echo [2] Force YouTube-DL
-echo [A] Embed Album Art
-echo [R] Download Album Art
-echo [S] Embed Subtitles
-echo [X] Download Subtitles
-echo [M] Add Metadata
+echo [Z] Reset
+echo [Q] Back
 echo.
-echo [R] Reset Settings
-echo.
-set /p inputs= "> " 
-if %inputs%==A goto downloadboth
-if %inputs%==a goto downloadboth
-if %inputs%==S goto wip
-if %inputs%==s goto wip
-if %inputs%==R goto wip
-if %inputs%==r goto wip
-if %inputs%==stop goto exit
-if %inputs%==quit goto exit
-if %inputs%==exit goto exit
-cls
+set /p inputs="> "
+if /I "%inputs%"=="Y" set /a forceytdlp^=1 & goto updatesettings
+if /I "%inputs%"=="2" set /a forceytdl^=1 & goto updatesettings
+if /I "%inputs%"=="A" set /a embedthumb^=1-embedthumb & goto updatesettings
+if /I "%inputs%"=="R" set /a downloadthumb^=1-downloadthumb & goto updatesettings
+if /I "%inputs%"=="S" set /a embedsubs^=1-embedsubs & goto updatesettings
+if /I "%inputs%"=="X" set /a downloadsubs^=1-downloadsubs & goto updatesettings
+if /I "%inputs%"=="M" set /a addmeta^=1-addmeta & goto updatesettings
+if /I "%inputs%"=="Z" (
+    set forceytdlp=0
+    set forceytdl=0
+    set embedthumb=0
+    set downloadthumb=0
+    set embedsubs=0
+    set downloadsubs=0
+    set addmeta=0
+	set "customsettings="
+    goto updatesettings
+)
+if /I "%inputs%"=="Q" goto formatdownloadcls
 color 4
-echo Invalid Input...
-timeout 2 >nul
-goto formatdownloadcls
-echo
-:: -------------------------------------------------- Program Options (Deprecated)
-:: :downloadoptions
-:: cls
-:: mode con cols=40 lines=13
-:: color 0a
-:: cls
-:: echo Other Options
-:: echo.
-:: echo [1] Use YOUTUBE-DL
-:: echo [2] Use YT-DLP
-:: echo.
-:: echo YT-DLP can be used to bypass
-:: echo age restricted videos
-:: echo amongst other things.
-:: echo The default is set to
-:: echo youtube-dl on launch.
-:: echo. 
-:: set /p inputdo= "> " 
-:: if %inputdo%==1 set downloader=youtube-dl.exe
-:: if %inputdo%==2 set downloader=yt-dlp.exe
-:: timeout 1 >nul
-:: cls
-:: goto formatdownloadcls
-:: -------------------------------------------------- App Credits
-:credits
-cls
-mode con cols=40 lines=16
-color 0a
-cls
-echo App Credits
-echo.
-echo App Made By
-echo n0stal6ic#0001 - Discord
-echo https://n0stal6ic.com/
-echo n0stal6ic
-echo.
-echo Libraries Used
-echo ffmpeg     https://www.ffmpeg.org/
-echo youtube-dl https://youtube-dl.org/
-echo yt-dlp     https://github.com/yt-dlp
-echo. 
-pause
-cls
-goto formatdownloadcls
-exit
+echo Invalid input...
+timeout /t 2 >nul
+goto settings
+:updatesettings
+set "customsettings="
+if "%addmeta%"=="1" set "customsettings=%customsettings% --add-metadata"
+if "%embedthumb%"=="1" set "customsettings=%customsettings% --embed-thumbnail"
+if "%downloadthumb%"=="1" set "customsettings=%customsettings% --write-thumbnail"
+if "%embedsubs%"=="1" set "customsettings=%customsettings% --embed-subs"
+if "%downloadsubs%"=="1" set "customsettings=%customsettings% --write-subs"
+goto settings
 :: -------------------------------------------------- Format Download Commands
 :downloadaudio
 mode con cols=54 lines=5
 cls
 echo Downloading Audio...
 timeout 1 >nul
-%downloader% -f bestaudio %albumart% -o "~/Desktop/%%(title)s.%%(ext)s" %url%
+%downloader% %cookies% -f bestaudio %albumart% -o "~/Desktop/%%(title)s.%%(ext)s" %customsettings% %url% 
 goto finished
 :downloadvideo
 mode con cols=54 lines=5
 cls
 echo Downloading Video...
 timeout 1 >nul
-%downloader% -f bestvideo -o "~/Desktop/%%(title)s.%%(ext)s" %url%
+%downloader% %cookies% -f bestvideo -o "~/Desktop/%%(title)s.%%(ext)s" %customsettings% %url%
 goto finished
 :downloadplaylist
 mode con cols=54 lines=5
 cls
 echo Downloading Playlist...
 timeout 1 >nul
-%downloader% -i -f bestvideo+bestaudio -o "~/Desktop/%%(title)s.%%(ext)s" --yes-playlist %url%
+%downloader% %cookies% -i -f bestvideo+bestaudio -o "~/Desktop/%%(title)s.%%(ext)s" --yes-playlist %customsettings% %url%
 goto finished
 :downloadboth
 mode con cols=54 lines=5
 cls
 echo Downloading Original...
 timeout 1 >nul
-%downloader% -f bestvideo+bestaudio -o "~/Desktop/%%(title)s.%%(ext)s" %url%
+%downloader% %cookies% -f bestvideo+bestaudio -o "~/Desktop/%%(title)s.%%(ext)s" %customsettings% %url%
 goto finished
-:: -------------------------------------------------- If null selection then choose other
+:: -------------------------------------------------- If null selection
 :wip
 cls
 color 4
@@ -239,26 +216,113 @@ cls
 color 0a
 echo Done!
 timeout 2 >nul
-:: bruh this is annoying remove this shit
-:: explorer %downloaddir%
-:: timeout 1 >nul
-:: bruh this is annoying remove this shit
-goto exit
+goto formatdownloadcls
 :: -------------------------------------------------- Custom Commands
 :custom
 cls
 mode con cols=60 lines=15
 color 0a
-cd %ytdir%
-echo Set a custom command!
-echo (ffmpeg "values here")
-echo (youtube-dl "values here")
+echo Custom FFMPEG Converter
 echo.
-timeout 1 >nul
-set /p customyt= "> "
-%customyt%
+set "filepath="
+for %%F in ("%USERPROFILE%\Desktop\*.mp4" "%USERPROFILE%\Desktop\*.mkv" "%USERPROFILE%\Desktop\*.webm" "%USERPROFILE%\Desktop\*.m4a" "%USERPROFILE%\Desktop\*.opus" "%USERPROFILE%\Desktop\*.aac") do (
+    set "candidate=%%~fF"
+    call :checkLatest
+)
+if not defined filepath (
+    color 4
+    echo File not found.
+    timeout 3 >nul
+    goto formatdownloadcls
+)
+echo Selected: %filepath%
 echo.
-goto finished 
+echo Choose output type:
+echo [1] Convert to MP4 (H.264 / AAC)
+echo [2] Convert to MKV (H.265 / AAC)
+echo [3] Convert to MP3
+echo [4] Convert to OGG
+echo [5] Custom FFmpeg Command
+echo.
+set /p choice="> "
+if "%choice%"=="5" (
+    echo Enter full FFmpeg command. Use %%filepath%% for input:
+    set /p ffcustom="ffmpeg "
+    call ffmpeg %ffcustom:"=%filepath%"%
+    goto formatdownloadcls
+)
+echo.
+echo Select audio bitrate:
+echo [1] 128k
+echo [2] 192k
+echo [3] 256k
+echo [4] 320k
+echo [5] Lossless (Copy stream)
+echo.
+set /p bitrate="> "
+set "abitrate="
+set "vcodec="
+set "acodec="
+set "lossless=0"
+if "%bitrate%"=="1" set "abitrate=128k"
+if "%bitrate%"=="2" set "abitrate=192k"
+if "%bitrate%"=="3" set "abitrate=256k"
+if "%bitrate%"=="4" set "abitrate=320k"
+if "%bitrate%"=="5" set "lossless=1"
+set "outfile=%filepath%.converted"
+if "%choice%"=="1" (
+    if "%lossless%"=="1" (
+        ffmpeg -i "%filepath%" -c:v copy -c:a copy "%outfile%.mp4"
+    ) else (
+        ffmpeg -i "%filepath%" -c:v libx264 -crf 23 -preset slow -c:a aac -b:a %abitrate% "%outfile%.mp4"
+    )
+)
+if "%choice%"=="2" (
+    if "%lossless%"=="1" (
+        ffmpeg -i "%filepath%" -c:v copy -c:a copy "%outfile%.mkv"
+    ) else (
+        ffmpeg -i "%filepath%" -c:v libx265 -crf 28 -preset medium -c:a aac -b:a %abitrate% "%outfile%.mkv"
+    )
+)
+if "%choice%"=="3" (
+    if "%lossless%"=="1" (
+        ffmpeg -i "%filepath%" -vn -c:a copy "%outfile%.mp3"
+    ) else (
+        ffmpeg -i "%filepath%" -vn -c:a libmp3lame -b:a %abitrate% "%outfile%.mp3"
+    )
+)
+if "%choice%"=="4" (
+    if "%lossless%"=="1" (
+        ffmpeg -i "%filepath%" -vn -c:a copy "%outfile%.ogg"
+    ) else (
+        ffmpeg -i "%filepath%" -vn -c:a libvorbis -b:a %abitrate% "%outfile%.ogg"
+    )
+)
+echo.
+echo Done! File saved to Desktop.
+timeout 3 >nul
+goto formatdownloadcls
+:checkLatest
+for %%T in ("%candidate%") do (
+    set "currfile=%%~fT"
+    set "currtime=%%~tT"
+)
+if not defined filepath (
+    set "filepath=%currfile%"
+    set "filetime=%currtime%"
+    goto :eof
+)
+setlocal enabledelayedexpansion
+for %%a in ("%currtime%") do set "t1=%%~ta"
+for %%b in ("%filetime%") do set "t2=%%~tb"
+if "!t1!" GTR "!t2!" (
+    endlocal
+    set "filepath=%currfile%"
+    set "filetime=%currtime%"
+) else (
+    endlocal
+)
+goto :eof
 :: -------------------------------------------------- Instalation of Libraries
 :ytdlni
 mode con cols=40 lines=8
@@ -291,9 +355,9 @@ md C:\youtube-dl
 md C:\youtube-dl\settings
 cls
 echo Installing Required Libraries...
-powershell -command "start-bitstransfer -source https://cdn.discordapp.com/attachments/1161852044974493756/1171078916316868618/ffmpeg.exe -destination C:\youtube-dl\ffmpeg.exe"
-::powershell -command "start-bitstransfer -source https://github.com/ytdl-org/youtube-dl/releases/download/2021.02.10/youtube-dl.exe -destination C:\youtube-dl\youtube-dl.exe"
-powershell -command "start-bitstransfer -source https://github.com/yt-dlp/yt-dlp/releases/download/2024.05.27/yt-dlp.exe -destination C:\youtube-dl\yt-dlp.exe"
+powershell -command "start-bitstransfer -source https://files.catbox.moe/91vymd.bin -destination C:\youtube-dl\ffmpeg.exe"
+powershell -command "start-bitstransfer -source https://github.com/ytdl-org/youtube-dl/releases/download/2021.12.17/youtube-dl.exe -destination C:\youtube-dl\youtube-dl.exe"
+powershell -command "start-bitstransfer -source https://github.com/yt-dlp/yt-dlp/releases/download/2025.03.31/yt-dlp.exe -destination C:\youtube-dl\yt-dlp.exe"
 attrib -r -h -s ytdir.yt
 cls
 del ytdir.yt

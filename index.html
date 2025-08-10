@@ -2,325 +2,294 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="n0stal6ic"/>
-    <meta property="og:description" content="n0stal6ic"/>
-    <meta property="og:url" content="https://nostalgic.cc"/>
-    <meta property="og:type" content="website"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="n0stal6ic">
+    <meta property="og:description" content="n0stal6ic">
+    <meta property="og:url" content="https://nostalgic.cc">
+    <meta property="og:type" content="website">
     <meta name="description" content="n0stal6ic's Website">
     <title>n0stal6ic</title>
-<style>
-    * {
-        font-family: "JetBrains Mono";
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        color: white;
-        text-decoration: none;
-    }
-
-    body {
-        background-color: #000000;
-        font-size: 1.7em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-    }
-
-    #container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 80%;
-        max-width: 1000px;
-    }
-
-    @keyframes flicker {
-        0%, 100% {
-            box-shadow: 0 0 25px rgba(0, 0, 255, 0.8);
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            color: white;
+            text-decoration: none;
         }
-        60% {
-            box-shadow: 0 0 25px rgba(0, 0, 255, 0.5);
+        body {
+            background-color: #000;
+            font-size: 1.7em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-    }
-
-	#popup-banner {
-		position: fixed;
-		top: -100px;
-		left: 0;
-		width: 100%;
-		background-color: #3a3a3a;
-		color: white;
-		text-align: center;
-		padding: 15px 10px;
-		font-size: 0.8em;
-		z-index: 9999;
-		border-bottom: 2px solid #555555;
-		box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-		animation: slideDown 1s ease-out forwards;
-	}
-	
-	#popup-banner a {
-		color: #bbb;
-		text-decoration: underline;
-		transition: color 0.2s;
-	}
-	
-	#popup-banner a:hover {
-		color: #fff;
-	}
-	
-	@keyframes slideDown {
-		to {
-			top: 0;
-		}
-	}
-    .scrollable-container {
-        max-height: 400px;
-        overflow-y: auto;
-        padding-right: 10px;
-        scrollbar-width: thin;
-        scrollbar-color: #777777 #555555;
-    }
-
-    .scrollable-container::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    .scrollable-container::-webkit-scrollbar-track {
-        background: #555555;
-        border-radius: 5px;
-    }
-
-    .scrollable-container::-webkit-scrollbar-thumb {
-        background-color: #777777;
-        border-radius: 5px;
-        border: 2px solid #555555;
-    }
-
-    #content {
-        background-color: #272727;
-        display: flex;
-        border-radius: 15.6px;
-        width: 100%;
-        padding: 20px;
-        animation: flicker 3s infinite;
-        transition: transform 0.2s, box-shadow 0.1s;
-    }
-
-    #content:hover {
-        transform: scale(0.5);
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
-    }
-
-    #left-panel {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-right: 20px;
-    }
-
-    #profile-box {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    #profile-box img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-
-    .button-group {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .button-group a {
-        background-color: #555555;
-        padding: 10px 15px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        text-align: center;
-        transition: background-color 0.4s;
-    }
-
-    .button-group a:hover {
-        background-color: #777777;
-    }
-
-    #sticker-box {
-        background-color: #3a3a3a;
-        padding: 10px;
-        border-radius: 10px;
-        width: 300px;
-        max-width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        overflow: hidden;
-    }
-
-    .sticker-container {
-        display: flex;
-        gap: 10px;
-        animation: scroll 120s linear infinite;
-        white-space: nowrap;
-    }
-
-    .sticker-container a img {
-        width: 88px;
-        height: 31px;
-        display: block;
-    }
-
-    @keyframes scroll {
-        from {
-            transform: translateX(5%);
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 80%;
+            max-width: 1000px;
         }
-        to {
-            transform: translateX(-120%);
+        @keyframes flicker {
+            0%, 100% {
+                box-shadow: 0 0 25px rgba(0, 0, 255, 0.8);
+            }
+            60% {
+                box-shadow: 0 0 25px rgba(0, 0, 255, 0.5);
+            }
         }
-    }
-
-    #main-content {
-        flex: 2;
-        background-color: #3a3a3a;
-        padding: 20px;
-        border-radius: 10px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .main-content-section {
-        display: none;
-    }
-
-    .main-content-section.active {
-        display: block;
-    }
-
-    .card {
-        background-color: #555555;
-        padding: 10px 15px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        text-align: center;
-        transition: background-color 0.2s;
-    }
-
-    .card:hover {
-        background-color: #777777;
-    }
-
-    .social-buttons a {
-        background-color: #555555;
-        padding: 10px 15px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        text-align: center;
-        display: block;
-        transition: background-color 0.2s;
-    }
-
-    .social-buttons a:hover {
-        background-color: #777777;
-    }
-
-    @media screen and (max-width: 768px) {
+        #popup-banner {
+            position: fixed;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            background-color: #3a3a3a;
+            color: white;
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 0.8em;
+            z-index: 9999;
+            border-bottom: 2px solid #555;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            animation: slideDown 1s ease-out forwards;
+        }
+        #popup-banner a {
+            color: #bbb;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        #popup-banner a:hover {
+            color: #fff;
+        }
+        @keyframes slideDown {
+            to {
+                top: 0;
+            }
+        }
+        .scrollable-container {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #777 #555;
+        }
+        .scrollable-container::-webkit-scrollbar {
+            width: 10px;
+        }
+        .scrollable-container::-webkit-scrollbar-track {
+            background: #555;
+            border-radius: 5px;
+        }
+        .scrollable-container::-webkit-scrollbar-thumb {
+            background-color: #777;
+            border-radius: 5px;
+            border: 2px solid #555;
+        }
         #content {
+            background-color: #272727;
+            display: flex;
+            border-radius: 15.6px;
+            width: 100%;
+            padding: 20px;
+            animation: flicker 3s infinite;
+            transition: transform 0.2s, box-shadow 0.1s;
+        }
+        #content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+        }
+        #left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-right: 20px;
+        }
+        #profile-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #profile-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .button-group a {
+            background-color: #555;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            transition: background-color 0.4s;
+        }
+        .button-group a:hover {
+            background-color: #777;
+        }
+        #sticker-box {
+            background-color: #3a3a3a;
+            padding: 10px;
+            border-radius: 10px;
+            width: 300px;
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+        .sticker-container {
+            display: flex;
+            gap: 10px;
+            animation: scroll 120s linear infinite;
+            white-space: nowrap;
+        }
+        .sticker-container a img {
+            width: 88px;
+            height: 31px;
+            display: block;
+        }
+        @keyframes scroll {
+            from {
+                transform: translateX(5%);
+            }
+            to {
+                transform: translateX(-120%);
+            }
+        }
+        #main-content {
+            flex: 2;
+            background-color: #3a3a3a;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
             flex-direction: column;
         }
-
-        #left-panel {
-            margin-right: 0;
-            margin-bottom: 20px;
-            width: 100%;
-            align-items: center;
+        .main-content-section {
+            display: none;
         }
-    }
-</style>
+        .main-content-section.active {
+            display: block;
+        }
+        .card {
+            background-color: #555;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        .card:hover {
+            background-color: #777;
+        }
+        .social-buttons a {
+            background-color: #555;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            display: block;
+            transition: background-color 0.2s;
+        }
+        .social-buttons a:hover {
+            background-color: #777;
+        }
+        @media screen and (max-width: 768px) {
+            #content {
+                flex-direction: column;
+            }
+            #left-panel {
+                margin-right: 0;
+                margin-bottom: 20px;
+                width: 100%;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id='container'>
-        <div id='content'>
-            <div id='left-panel'>
-                <div id='profile-box'>
-                    <img src='https://nostalgic.cc/icon.png' alt='Picture'>
+    <div id="container">
+        <div id="content">
+            <div id="left-panel">
+                <div id="profile-box">
+                    <img src="https://nostalgic.cc/icon.png" alt="Picture">
                 </div>
-                <div class='button-group'>
-                    <a href='#' onclick="showMainContent('content1')">Home</a>
-                    <a href='#' onclick="showMainContent('content2')">Socials</a>
-                    <a href='#' onclick="showMainContent('content3')">Software</a>
-				</div>
-            <div id="sticker-box">
- 			   <div class="sticker-container">
-  			      <a href="https://lucida.to/"><img src="https://lucida.to/buttons/88x31.gif" alt="Lucida"></a>
-      			  <a href="#"><img src="webicons/Vore.gif" alt="Vore"></a>
-      			  <a href="#"><img src="webicons/Packers.gif" alt="Packers"></a>
-      			  <a href="#"><img src="webicons/EFF.gif" alt="EFF"></a>
-       			  <a href="#"><img src="webicons/Soulseek.gif" alt="Soulseek"></a>
-       			  <a href="#"><img src="webicons/Maws.png" alt="Maws"></a>
-   			      <a href="#"><img src="webicons/Firefox2.gif" alt="Firefox2"></a>
-   			      <a href="#"><img src="webicons/Fb2k.png" alt="Foobar2000"></a>
-       			  <a href="#"><img src="webicons/LastFM.png" alt="LastFM"></a>
-   			      <a href="#"><img src="webicons/7z.gif" alt="7-Zip"></a>
-       			  <a href="#"><img src="webicons/Arizona.gif" alt="Arizona"></a>
-       			  <a href="#"><img src="webicons/Audacity.gif" alt="Audacity"></a>
-        		  <a href="#"><img src="webicons/Blender.png" alt="Blender"></a>
-       			  <a href="#"><img src="webicons/EAC.gif" alt="EAC"></a>
-    		      <a href="#"><img src="webicons/Emma.gif" alt="Emma"></a>
-   			      <a href="#"><img src="webicons/Fb2k2.gif" alt="Foobar2000-2"></a>
-					<a href="#"><img src="webicons/Fediverse.gif" alt="Fediverse"></a>
-					<a href="#"><img src="webicons/Firefox.gif" alt="Firefox"></a>
- 			       <a href="#"><img src="webicons/FreeSpeech.gif" alt="Free Speech"></a>
- 			       <a href="#"><img src="webicons/Freeware.gif" alt="Freeware"></a>
- 			       <a href="#"><img src="webicons/Gerocaching.png" alt="Geocaching"></a>
-      			  <a href="#"><img src="webicons/I2P.gif" alt="I2P"></a>
-    			    <a href="#"><img src="webicons/InternetArchive.gif" alt="Internet Archive"></a>
-    			    <a href="#"><img src="webicons/Jellyfin.gif" alt="Jellyfin"></a>
-    			    <a href="#"><img src="webicons/Lain.png" alt="Lain"></a>
-   			     <a href="#"><img src="webicons/LainNavi.png" alt="Lain Navi"></a>
-   			     <a href="#"><img src="webicons/LapFox.gif" alt="LapFox"></a>
-   			     <a href="#"><img src="webicons/LegalCannabis.gif" alt="Legal Cannabis"></a>
-   			     <a href="#"><img src="webicons/Libreboot.gif" alt="Libreboot"></a>
-  			      <a href="#"><img src="webicons/MSX.gif" alt="MSX"></a>
-  			      <a href="#"><img src="webicons/Mastodon.gif" alt="Mastodon"></a>
-     			   <a href="#"><img src="webicons/NOAA.gif" alt="NOAA"></a>
-     			   <a href="#"><img src="webicons/Navi.jpeg" alt="Navi"></a>
-     			   <a href="#"><img src="webicons/Notepad++.gif" alt="Notepad++"></a>
-     			   <a href="#"><img src="webicons/PGP.gif" alt="PGP"></a>
-      			  <a href="#"><img src="webicons/PISS.gif" alt="PISS"></a>
-       			 <a href="#"><img src="webicons/PaintNET.gif" alt="Paint.NET"></a>
-       			 <a href="#"><img src="webicons/Paws.gif" alt="Paws"></a>
-      			  <a href="#"><img src="webicons/Piracy.gif" alt="Piracy"></a>
-      			  <a href="#"><img src="webicons/Preserve.gif" alt="Preserve"></a>
-      			  <a href="#"><img src="webicons/RadiShack.gif" alt="Radio Shack"></a>
-      			  <a href="#"><img src="webicons/Rainbow.gif" alt="Rainbow"></a>
-     			   <a href="#"><img src="webicons/Shitify.gif" alt="Shitify"></a>
-     			   <a href="#"><img src="webicons/Stereo.gif" alt="Stereo"></a>
-     			   <a href="#"><img src="webicons/ThinkPad.gif" alt="ThinkPad"></a>
-   			     <a href="#"><img src="webicons/Tor.gif" alt="Tor"></a>
-   			     <a href="#"><img src="webicons/UnderCon.gif" alt="Under Construction"></a>
-   			     <a href="#"><img src="webicons/UsePGP.gif" alt="Use PGP"></a>
-   			     <a href="#"><img src="webicons/VLC.png" alt="VLC"></a>
-   			     <a href="#"><img src="webicons/Vote.gif" alt="Vote"></a>
-   				 </div>
-			</div>
-            <div id='main-content'>
-                <div id='content1' class='main-content-section active'>
-                    <p>Hello! 👋 Ts is my website. I go by Nostalgic, but some call me Storm or Zo. I’m a 20yr old furry who’s been in the fandom for 9yrs. I spend most of my time doing niche internet stuff and dabble in things and stuff. I’m Native American. Im greysexual. Im pretty autistic. Im chopped. Im from 🧀 Wisconsin. I love my boyfriend, Dan! 💙</p>
+                <div class="button-group">
+                   <a href="#" onclick="showMainContent('content1')">Home</a>
+                   <a href="#" onclick="showMainContent('content2')">Socials</a>
+                   <a href="#" onclick="showMainContent('content3')">Software</a>
                 </div>
-                <div id='content2' class='main-content-section'>
-					<div class="scrollable-container">
-						<div class="social-buttons">
-							<a href="mailto:n0stal6ic@riseup.net" target="_blank">E-Mail</a>
+                <div id="sticker-box">
+                    <div class="sticker-container">
+						<a href="https://lucida.to/"><img src="https://lucida.to/buttons/88x31.gif" alt="Lucida"></a>
+						<a href="#"><img src="webicons/Vore.gif" alt="Vore"></a>
+						<a href="#"><img src="webicons/Packers.gif" alt="Packers"></a>
+						<a href="#"><img src="webicons/EFF.gif" alt="EFF"></a>
+						<a href="#"><img src="webicons/Soulseek.gif" alt="Soulseek"></a>
+						<a href="#"><img src="webicons/Maws.png" alt="Maws"></a>
+						<a href="#"><img src="webicons/Firefox2.gif" alt="Firefox2"></a>
+						<a href="#"><img src="webicons/Fb2k.png" alt="Foobar2000"></a>
+						<a href="#"><img src="webicons/LastFM.png" alt="LastFM"></a>
+						<a href="#"><img src="webicons/7z.gif" alt="7-Zip"></a>
+						<a href="#"><img src="webicons/Arizona.gif" alt="Arizona"></a>
+						<a href="#"><img src="webicons/Audacity.gif" alt="Audacity"></a>
+						<a href="#"><img src="webicons/Blender.png" alt="Blender"></a>
+						<a href="#"><img src="webicons/EAC.gif" alt="EAC"></a>
+						<a href="#"><img src="webicons/Emma.gif" alt="Emma"></a>
+						<a href="#"><img src="webicons/Fb2k2.gif" alt="Foobar2000-2"></a>
+						<a href="#"><img src="webicons/Fediverse.gif" alt="Fediverse"></a>
+						<a href="#"><img src="webicons/Firefox.gif" alt="Firefox"></a>
+						<a href="#"><img src="webicons/FreeSpeech.gif" alt="Free Speech"></a>
+						<a href="#"><img src="webicons/Freeware.gif" alt="Freeware"></a>
+						<a href="#"><img src="webicons/Gerocaching.png" alt="Geocaching"></a>
+						<a href="#"><img src="webicons/I2P.gif" alt="I2P"></a>
+						<a href="#"><img src="webicons/InternetArchive.gif" alt="Internet Archive"></a>
+						<a href="#"><img src="webicons/Jellyfin.gif" alt="Jellyfin"></a>
+						<a href="#"><img src="webicons/Lain.png" alt="Lain"></a>
+						<a href="#"><img src="webicons/LainNavi.png" alt="Lain Navi"></a>
+						<a href="#"><img src="webicons/LapFox.gif" alt="LapFox"></a>
+						<a href="#"><img src="webicons/LegalCannabis.gif" alt="Legal Cannabis"></a>
+						<a href="#"><img src="webicons/Libreboot.gif" alt="Libreboot"></a>
+						<a href="#"><img src="webicons/MSX.gif" alt="MSX"></a>
+						<a href="#"><img src="webicons/Mastodon.gif" alt="Mastodon"></a>
+						<a href="#"><img src="webicons/NOAA.gif" alt="NOAA"></a>
+						<a href="#"><img src="webicons/Navi.jpeg" alt="Navi"></a>
+						<a href="#"><img src="webicons/Notepad++.gif" alt="Notepad++"></a>
+						<a href="#"><img src="webicons/PGP.gif" alt="PGP"></a>
+						<a href="#"><img src="webicons/PISS.gif" alt="PISS"></a>
+						<a href="#"><img src="webicons/PaintNET.gif" alt="Paint.NET"></a>
+						<a href="#"><img src="webicons/Paws.gif" alt="Paws"></a>
+						<a href="#"><img src="webicons/Piracy.gif" alt="Piracy"></a>
+						<a href="#"><img src="webicons/Preserve.gif" alt="Preserve"></a>
+						<a href="#"><img src="webicons/RadiShack.gif" alt="Radio Shack"></a>
+						<a href="#"><img src="webicons/Rainbow.gif" alt="Rainbow"></a>
+						<a href="#"><img src="webicons/Shitify.gif" alt="Shitify"></a>
+						<a href="#"><img src="webicons/Stereo.gif" alt="Stereo"></a>
+						<a href="#"><img src="webicons/ThinkPad.gif" alt="ThinkPad"></a>
+						<a href="#"><img src="webicons/Tor.gif" alt="Tor"></a>
+						<a href="#"><img src="webicons/UnderCon.gif" alt="Under Construction"></a>
+						<a href="#"><img src="webicons/UsePGP.gif" alt="Use PGP"></a>
+						<a href="#"><img src="webicons/VLC.png" alt="VLC"></a>
+						<a href="#"><img src="webicons/Vote.gif" alt="Vote"></a>
+                    </div>
+                </div>
+            </div>
+            <div id="main-content">
+                <div id="content1" class="main-content-section active">
+                    <p>Hello! 👋 This is my website. I go by Nostalgic, but some call me Storm or Zo. I'm a 20yr old furry who’s been in the fandom for 9yrs. I spend most of my time doing niche internet stuff and dabble in things and stuff. I'm Native American. I'm greysexual. I'm pretty autistic. I'm chopped. I'm from 🧀 Wisconsin. I love my boyfriend, Dan! 💙</p>
+                </div>
+                <div id="content2" class="main-content-section">
+                    <div class="scrollable-container">
+                        <div class="social-buttons">
+                            <a href="mailto:n0stal6ic@riseup.net" target="_blank">E-Mail</a>
 							<a href="https://discord.com/users/778297278816845825" target="_blank">Discord</a>
 							<a href="https://bsky.app/profile/n0stal6ic.bsky.social" target="_blank">BlueSky</a>
 							<a href="https://www.tiktok.com/@n0stal6ic" target="_blank">TikTok</a>
@@ -334,42 +303,35 @@
 							<a href="https://example.com" target="_blank">Mastodon</a>
 							<a href="https://vrchat.com/home/user/usr_4f90b718-839a-4eae-9a9d-8ea1fcde02c2" target="_blank">VRChat</a>
 							<a href="https://hub.abinteractive.net/social/profile?guid=7bbdcea7-a7f8-a35c-9ba6-fe2fef31433c" target="_blank">ChilloutVR</a>
-						</div>
+                        </div>
                     </div>
                 </div>
-                <div id='content3' class='main-content-section'>
-					<div class="scrollable-container">
-					<a href="https://nostalgic.cc/apps/MediaDL.bat" target="_blank">
+                <div id="content3" class="main-content-section">
+                    <div class="scrollable-container">
+                       <a href="https://nostalgic.cc/apps/MediaDL.bat" target="_blank">
 							<div class="card">
 								<h2>MediaDL</h2>
-								<p>Simple YouTube downloader in batch.</p>
+								<p>youtube downloader thing</p>
 							</div>
 						</a>
 						<a href="https://nostalgic.cc/apps/Eclipse.exe" target="_blank">
 							<div class="card">
 								<h2>Eclipse Mod</h2>
-								<p>Modification tool for school laptops.</p>
+								<p>dumb mod thing idc</p>
 							</div>
 						</a>
-					</div>
-				</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script>
-/* START PAGE SWITCH */
-
         function showMainContent(contentId) {
-            document.querySelectorAll('.main-content-section').forEach(function(element) {
+            document.querySelectorAll('.main-content-section').forEach(function (element) {
                 element.classList.remove('active');
             });
             document.getElementById(contentId).classList.add('active');
         }
-
-/* END PAGE SWITCH */
-
-/* START RESIZE */
-
         function adjustPadding() {
             const leftPanel = document.getElementById('left-panel');
             if (window.innerWidth <= 768) {
@@ -378,36 +340,24 @@
                 leftPanel.style.paddingRight = '20px';
             }
         }
-
-        window.onload = function() {
+        window.onload = function () {
             showMainContent('content1');
             adjustPadding();
         };
-
         window.onresize = adjustPadding;
-
-/* END RESIZE */
-
-/* START HOVER CARD */
-
-document.getElementById('content').addEventListener('mousemove', function (event) {
-    const rect = this.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const offsetX = (x - centerX) / centerX;
-    const offsetY = (y - centerY) / centerY;
-
-    this.style.transform = `scale(1.02) perspective(500px) rotateX(${offsetY * 5}deg) rotateY(${offsetX * -5}deg)`;
-});
-
-document.getElementById('content').addEventListener('mouseleave', function () {
-    this.style.transform = 'scale(1) perspective(500px) rotateX(0deg) rotateY(0deg)';
-});
-
-/* END HOVER CARD */
+        document.getElementById('content').addEventListener('mousemove', function (event) {
+            const rect = this.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const offsetX = (x - centerX) / centerX;
+            const offsetY = (y - centerY) / centerY;
+            this.style.transform = `scale(1.02) perspective(500px) rotateX(${offsetY * 5}deg) rotateY(${offsetX * -5}deg)`;
+        });
+        document.getElementById('content').addEventListener('mouseleave', function () {
+            this.style.transform = 'scale(1) perspective(500px) rotateX(0deg) rotateY(0deg)';
+        });
     </script>
 </body>
 </html>

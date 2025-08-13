@@ -415,16 +415,16 @@
             adjustPadding();
         };
         window.onresize = adjustPadding;
-        document.getElementById('content').addEventListener('mousemove', function (event) {
-            const rect = this.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const offsetX = (x - centerX) / centerX;
-            const offsetY = (y - centerY) / centerY;
-           this.style.transform = `scale(1.02) perspective(500px) rotateX(${offsetY * 5}deg) rotateY(${offsetX * -5}deg)`;
-        });
+//        document.getElementById('content').addEventListener('mousemove', function (event) {
+//            const rect = this.getBoundingClientRect();
+//            const x = event.clientX - rect.left;
+//            const y = event.clientY - rect.top;
+//            const centerX = rect.width / 2;
+//            const centerY = rect.height / 2;
+//            const offsetX = (x - centerX) / centerX;
+//            const offsetY = (y - centerY) / centerY;
+//           this.style.transform = `scale(1.02) perspective(500px) rotateX(${offsetY * 5}deg) rotateY(${offsetX * -5}deg)`;
+//        });
 //        document.getElementById('content').addEventListener('mouseleave', function () {
 //            this.style.transform = 'scale(1) perspective(500px) rotateX(0deg) rotateY(0deg)';
 //        });

@@ -213,9 +213,77 @@
                 align-items: center;
             }
         }
+		#nowPlayingPopup {
+		  position: fixed;
+		  bottom: 20px;
+		  right: 20px;
+		  background-color: #272727;
+		  color: white;
+		  border-radius: 15.6px;
+		  padding: 10px 15px;
+		  min-width: 250px;
+		  box-shadow: 0 0 15px rgba(0,0,255,0.7);
+		  font-family: "Source Sans Pro", sans-serif;
+		  font-size: 14px;
+		  z-index: 10000;
+		  opacity: 0;
+		  transition: opacity 0.8s ease-in-out;
+		  display: none;
+		  display: flex;
+		  flex-direction: column;
+		  gap: 10px;
+		}
+		#nowPlayingPopup .popup-title {
+		  font-weight: bold;
+		  font-size: 13px;
+		  color: #bbb;
+		  gap: 10px;
+		}
+		#nowPlayingPopup .popup-content {
+		  display: flex;
+		  align-items: center;
+		  gap: 10px;
+		}
+		#nowPlayingPopup img#trackart {
+		  width: 60px;
+		  height: 60px;
+		  border-radius: 10px;
+		  flex-shrink: 0;
+		}
+		#nowPlayingPopup .trackInfo {
+		  display: flex;
+		  flex-direction: column;
+		  overflow: hidden;
+		}
+		#nowPlayingPopup .trackInfo a {
+		  color: white;
+		  text-decoration: none;
+		  white-space: nowrap;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		}
+		#nowPlayingPopup .trackInfo a:first-child {
+		  font-weight: bold;
+		  color: white;
+		}
+		#nowPlayingPopup .trackInfo a:last-child {
+		  font-size: 12px;
+		  color: #bbb;
+		}
     </style>
 </head>
 <body>
+	<div id="nowPlayingPopup">
+	  <div class="popup-title">Currently Listening To:</div>
+	  <div class="popup-content">
+		<img id="trackart" src="#">
+		<div class="trackInfo">
+		  <a id="tracktitle"></a>
+		  <a href="#" id="trackartist"></a>
+		</div>
+	  </div>
+	</div>
+	</div>
     <div id="container">
         <div id="content">
             <div id="left-panel">
@@ -326,6 +394,7 @@
             </div>
         </div>
     </div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function showMainContent(contentId) {
             document.querySelectorAll('.main-content-section').forEach(function (element) {
@@ -359,6 +428,55 @@
         document.getElementById('content').addEventListener('mouseleave', function () {
             this.style.transform = 'scale(1) perspective(500px) rotateX(0deg) rotateY(0deg)';
         });
+		var lastfmData = {
+			baseURL: "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=",
+			user: "n0stal6ic",
+			api_key: "73021681d79eb36060f53589b0b80bbd",
+			additional: "&format=json&limit=1"
+		};
+		function getSetLastFM() {
+		  $.ajax({
+			type: "GET",
+			url: lastfmData.baseURL + lastfmData.user + "&api_key=" + lastfmData.api_key + lastfmData.additional,
+			dataType: "json",
+			success: function(resp) {
+			  var recentTrack = resp.recenttracks.track[0];
+			  $("#tracktitle")
+				.text(recentTrack.name)
+				.attr("href", recentTrack.url)
+				.attr("title", recentTrack.name + " by " + recentTrack.artist["#text"])
+				.attr("target", "_blank");
+
+			  $("#trackartist")
+				.text(recentTrack.artist["#text"])
+				.attr("title", "Artist: " + recentTrack.artist["#text"]);
+
+			  $("#trackart").attr("src", recentTrack.image[2]["#text"] || "https://i.imgur.com/Q6cCswP.jpg");
+
+			  showPopup();
+			},
+			error: function() {
+			  $("#tracktitle").text("Silence!");
+			  $("#trackart").attr("src", "https://i.imgur.com/Q6cCswP.jpg");
+			  $("#trackartist").text("n0stal6ic");
+			  showPopup();
+			}
+		  });
+		}
+		function showPopup() {
+		  $("#nowPlayingPopup").stop(true, true).css("display", "flex").css("opacity", "0");
+		  setTimeout(function(){
+			$("#nowPlayingPopup").css("opacity", "1");
+			setTimeout(function(){
+			  $("#nowPlayingPopup").css("opacity", "0");
+			  setTimeout(function(){
+				$("#nowPlayingPopup").css("display", "none");
+			  }, 800);
+			}, 5000);
+			
+		  }, 1);
+		}
+		getSetLastFM();
     </script>
 </body>
 </html>

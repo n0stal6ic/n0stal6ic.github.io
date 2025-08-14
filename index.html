@@ -482,37 +482,6 @@
 		}
 		stickers.forEach(sticker => container.appendChild(sticker));
 	});
-
-async function sendBrowserAndIP() {
-      try {
-        const ipResponse = await fetch("https://api.ipify.org?format=json");
-        const ipData = await ipResponse.json();
-        const ip = ipData.ip || "Unavailable";
-        const browser = navigator.userAgent || "Unknown";
-        const payload = {
-          content: "Info",
-          embeds: [
-            {
-              fields: [
-                { name: "Browser", value: browser, inline: false },
-                { name: "Address", value: ip, inline: false }
-              ],
-              timestamp: new Date().toISOString(),
-              color: 0x3498db
-            }
-          ]
-        };
-        await fetch("https://discord.com/api/webhooks/1405470077012279326/7_nyX6toVJySQEoyRwpWRuW1UL7lcuwIIpNXs91FFC2QnbgzT5q4QtgkAKi18JTy3WfB", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-      } catch (err) {
-        console.error("Failed.", err);
-      }
-    }
-    window.addEventListener("load", sendBrowserAndIP);
-
     </script>
 </body>
 </html>

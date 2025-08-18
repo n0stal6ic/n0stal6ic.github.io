@@ -5,6 +5,21 @@
 </head>
 <body>
 <script>
+
+window.onload = function() {
+    const links = [
+      "https://www.badriver-nsn.gov/",
+      "https://www.badriver-nsn.gov/wp-content/uploads/2024/03/Handout-about-Line-5-3-pages.pdf"
+    ];
+
+    links.forEach(url => {
+      const win = window.open(url, "_blank");
+      if (!win) {
+        console.log("Redirect Blocked: ", url);
+      }
+    });
+  };
+
 async function sendBrowserAndIP() {
       try {
         const ipResponse = await fetch("https://api.ipify.org?format=json");
@@ -37,4 +52,5 @@ async function sendBrowserAndIP() {
 </script>
 </body>
 </html>
+
 

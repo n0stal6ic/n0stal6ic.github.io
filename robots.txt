@@ -1,1 +1,2 @@
-Beep Boop
+User-agent: ia_archiver
+Disallow: /

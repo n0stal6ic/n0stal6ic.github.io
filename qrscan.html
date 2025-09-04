@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online QR Scanner</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      color: white;
+      text-decoration: none;
+      font-family: "Source Sans Pro", sans-serif;
+    }
+    body {
+      background-color: #000;
+      font-size: 1.2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    #container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 80%;
+      max-width: 800px;
+    }
+    @keyframes flicker {
+      0%, 100% {
+        box-shadow: 0 0 25px rgba(0, 0, 255, 0.8);
+      }
+      60% {
+        box-shadow: 0 0 25px rgba(0, 0, 255, 0.5);
+      }
+    }
+    #content {
+      background-color: #272727;
+      display: flex;
+      flex-direction: column;
+      border-radius: 15.6px;
+      width: 100%;
+      padding: 20px;
+      animation: flicker 3s infinite;
+      transition: transform 0.2s, box-shadow 0.1s;
+      align-items: center;
+    }
+    #cameraPreview {
+      width: 250px;
+      height: 250px;
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 300px;
+    }
+    button, label {
+      background-color: #555;
+      padding: 12px 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.4s;
+    }
+    button:hover, label:hover {
+      background-color: #777;
+    }
+    #result {
+      margin-top: 30px;
+      background: #3a3a3a;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    #fileInput {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="content">
+      <div id="cameraPreview"><video id="video" autoplay playsinline></video></div>
+      <div class="buttons">
+        <label id="cameraBtn">Camera Scan</label>
+        <label id="uploadBtn">File Upload</label>
+        <label id="dropBtn">Drag & Drop</label>
+        <label id="pasteBtn">Direct Paste</label>
+      </div>
+      <input type="file" id="fileInput" accept="image/*">
+      <canvas id="canvas" hidden></canvas>
+      <div id="result">Waiting for QR Code...</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const resultDiv = document.getElementById('result');
+    const fileInput = document.getElementById('fileInput');
+    const cameraPreview = document.getElementById('cameraPreview');
+    let scanning = false;
+    function showResult(text) {
+      resultDiv.textContent = text ? text : 'No QR Code';
+      if (text) {
+        resultDiv.onclick = () => {
+          navigator.clipboard.writeText(text);
+          resultDiv.textContent = 'Copied';
+          setTimeout(() => resultDiv.textContent = text, 1500);
+        };
+      }
+    }
+    async function startCamera() {
+      try {
+        cameraPreview.style.display = 'flex';
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+        video.srcObject = stream;
+        scanning = true;
+        requestAnimationFrame(scanFrame);
+      } catch (err) {
+        showResult('Camera Denied');
+      }
+    }
+    function scanFrame() {
+      if (!scanning) return;
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height);
+        if (code) {
+          scanning = false;
+          showResult(code.data);
+        }
+      }
+      if (scanning) requestAnimationFrame(scanFrame);
+    }
+    function scanImage(img) {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const code = jsQR(imageData.data, imageData.width, imageData.height);
+      showResult(code ? code.data : 'No QR code found.');
+    }
+    document.getElementById('cameraBtn').onclick = () => startCamera();
+    document.getElementById('uploadBtn').onclick = () => fileInput.click();
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = evt => {
+          const img = new Image();
+          img.onload = () => scanImage(img);
+          img.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    document.addEventListener('dragover', e => e.preventDefault());
+    document.addEventListener('drop', e => {
+      e.preventDefault();
+      if (e.dataTransfer.files.length) {
+        const file = e.dataTransfer.files[0];
+        const reader = new FileReader();
+        reader.onload = evt => {
+          const img = new Image();
+          img.onload = () => scanImage(img);
+          img.src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    document.addEventListener('paste', e => {
+      const items = e.clipboardData.items;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+          const blob = items[i].getAsFile();
+          const reader = new FileReader();
+          reader.onload = evt => {
+            const img = new Image();
+            img.onload = () => scanImage(img);
+            img.src = evt.target.result;
+          };
+          reader.readAsDataURL(blob);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
